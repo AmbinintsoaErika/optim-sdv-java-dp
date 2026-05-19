@@ -112,4 +112,15 @@ public class TypeReservation {
     public void setReductionPourcent(double reductionPourcent) {
         this.reductionPourcent = reductionPourcent;
     }
+
+    /**
+     * Calcul du montant total selon nombre de places et statut du client.
+     */
+    public double calculerMontantTotal(int nbPlaces, boolean clientPremium) {
+        double brut = montant * nbPlaces;
+        if (clientPremium) {
+            return brut * (1 - reductionPourcent / 100.0);
+        }
+        return brut;
+    }
 }

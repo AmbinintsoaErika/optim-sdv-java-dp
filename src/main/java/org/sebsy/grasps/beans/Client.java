@@ -1,10 +1,11 @@
 package org.sebsy.grasps.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Client {
@@ -79,5 +80,13 @@ public class Client {
      */
     public void setReservations(List<Reservation> reservations) {
         this.reservations = reservations;
+    }
+
+    /**
+     * Rattache une réservation à ce client (pattern Créateur : le client agrège ses réservations).
+     */
+    public void addReservation(Reservation reservation) {
+        reservation.setClient(this);
+        reservations.add(reservation);
     }
 }

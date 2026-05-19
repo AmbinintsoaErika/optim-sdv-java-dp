@@ -1,7 +1,6 @@
 package org.sebsy.grasps.beans;
 
 import java.time.LocalDateTime;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,6 +29,12 @@ public class Reservation {
     public Reservation(LocalDateTime date) {
         super();
         this.date = date;
+    }
+
+    public Reservation(LocalDateTime date, int nbPlaces) {
+        super();
+        this.date = date;
+        this.nbPlaces = nbPlaces;
     }
 
     /**
@@ -101,13 +106,12 @@ public class Reservation {
      * @param client the client to set
      */
     public void setClient(Client client) {
+        if (this.client != null) {
+            this.client.getReservations().remove(this);
+        }
         this.client = client;
-    }
-
-    /**
-     * Application du tarif selon le type de réservation
-     */
-    public void appliquerTarif(TypeReservation type) {
-        this.total = type.calculerMontantTotal(nbPlaces, client.isPremium());
+        if (this.client != null) {
+            this.client.getReservations().add(this);
+        }
     }
 }

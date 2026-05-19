@@ -4,15 +4,15 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Classe pure fabrication : transformations String vers {@link LocalDateTime}.
+ * Formattage de date en LocalDateTime
  */
 public class DateUtils {
 
-    private static final DateTimeFormatter RESERVATION_DATE_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
 
     private DateUtils() { }
 
     public static LocalDateTime toLocalDateTime(String dateStr) {
-        return LocalDateTime.parse(dateStr, RESERVATION_DATE_FORMAT);
+        return LocalDateTime.parse(dateStr, FORMATTER);
     }
 }

@@ -2,7 +2,6 @@ package org.sebsy.grasps.beans;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -83,10 +82,16 @@ public class Client {
     }
 
     /**
-     * Rattache une réservation à ce client (pattern Créateur : le client agrège ses réservations).
+     * Rattache une réservation à ce client
      */
     public void addReservation(Reservation reservation) {
         reservation.setClient(this);
-        reservations.add(reservation);
+    }
+
+    /**
+     * Retire une réservation du client
+     */
+    public void removeReservation(Reservation reservation) {
+        reservation.setClient(null);
     }
 }

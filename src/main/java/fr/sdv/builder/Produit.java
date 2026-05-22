@@ -10,24 +10,31 @@ public class Produit {
     private String grade;
     private Categorie categorie;
     private Marque marque;
-    private final List<Additif> additifs = new ArrayList<>();
-    private final List<Ingredient> ingredients = new ArrayList<>();
-    private final List<Allergene> allergenes = new ArrayList<>();
+    private List<Additif> additifs = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Allergene> allergenes = new ArrayList<>();
+
+    public Produit(String nom, String grade) {
+        this.nom = nom;
+        this.grade = grade;
+    }
+
+    public Produit(String nom, String grade, Categorie categorie, Marque marque, List<Ingredient> ingredients, List<Allergene> allergenes, List<Additif> additifs) {
+        this.nom = nom;
+        this.grade = grade;
+        this.categorie = categorie;
+        this.marque = marque;
+        this.ingredients = ingredients;
+        this.allergenes = allergenes;
+        this.additifs = additifs;
+    }
 
     public String getNom() {
         return nom;
     }
 
-    void setNom(String nom) {
-        this.nom = nom;
-    }
-
     public String getGrade() {
         return grade;
-    }
-
-    void setGrade(String grade) {
-        this.grade = grade;
     }
 
     public Categorie getCategorie() {

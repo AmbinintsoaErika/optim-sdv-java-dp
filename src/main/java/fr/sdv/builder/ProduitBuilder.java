@@ -1,45 +1,55 @@
 package fr.sdv.builder;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ProduitBuilder {
 
-    private final Produit produit = new Produit();
+    private String nom;
+    private String grade;
+    private Categorie categorie;
+    private Marque marque;
+    private List<Additif> additifs = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
+    private List<Allergene> allergenes = new ArrayList<>();
 
-    public ProduitBuilder nom(String nom) {
-        produit.setNom(nom);
+    public ProduitBuilder(){};
+
+    public ProduitBuilder withNom(String nom){
+        this.nom = nom;
+        return this;
+    }
+    public ProduitBuilder withGrade(String grade){
+        this.grade = grade;
         return this;
     }
 
-    public ProduitBuilder grade(String grade) {
-        produit.setGrade(grade);
+    public ProduitBuilder withCategorie(String nomCategorie) {
+    this.categorie = new Categorie(nomCategorie);
+    return this;
+}
+
+    public ProduitBuilder withMarque(String nomMarque) {
+        this.marque = new Marque(nomMarque);
         return this;
     }
 
-    public ProduitBuilder categorie(String nomCategorie) {
-        produit.setCategorie(new Categorie(nomCategorie));
+    public ProduitBuilder withIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
         return this;
     }
 
-    public ProduitBuilder marque(String nomMarque) {
-        produit.setMarque(new Marque(nomMarque));
+    public ProduitBuilder withAllergene(Allergene allergene) {
+        this.allergenes.add(allergene);
         return this;
     }
 
-    public ProduitBuilder additif(String nom, double qteMilligrammes) {
-        produit.addAdditif(new Additif(nom, qteMilligrammes));
-        return this;
-    }
-
-    public ProduitBuilder ingredient(String nom, double qteMilligrammes) {
-        produit.addIngredient(new Ingredient(nom, qteMilligrammes));
-        return this;
-    }
-
-    public ProduitBuilder allergene(String nom, double qteMilligrammes) {
-        produit.addAllergene(new Allergene(nom, qteMilligrammes));
+    public ProduitBuilder withAdditif(Additif additif) {
+        this.additifs.add(additif);
         return this;
     }
 
     public Produit build() {
-        return produit;
+        return new Produit(nom, grade, categorie, marque, ingredients, allergenes, additifs);
     }
+
 }

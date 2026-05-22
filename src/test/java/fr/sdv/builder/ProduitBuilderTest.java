@@ -7,17 +7,22 @@ public class ProduitBuilderTest extends TestCase {
 
     private static final double DELTA = 0.0001;
 
-    @Test
     public void testBuildProduitNominal() {
+        Ingredient lait = new Ingredient("Lait", 850.0);
+        Ingredient ferments = new Ingredient("Ferments lactiques", 12.5);
+
+        Additif e150d = new Additif("Colorant E150d", 0.5);
+        Allergene allergenelait = new Allergene("Lait", 850.0);
+
         Produit produit = new ProduitBuilder()
-                .nom("Yaourt nature")
-                .grade("A")
-                .categorie("Produits laitiers")
-                .marque("Danone")
-                .ingredient("Lait", 850.0)
-                .ingredient("Ferments lactiques", 12.5)
-                .additif("Colorant E150d", 0.5)
-                .allergene("Lait", 850.0)
+                .withNom("Yaourt nature")
+                .withGrade("A")
+                .withCategorie("Produits laitiers")
+                .withMarque("Danone")
+                .withIngredient(lait)
+                .withIngredient(ferments)
+                .withAdditif(e150d)
+                .withAllergene(allergenelait)
                 .build();
 
         assertEquals("Yaourt nature", produit.getNom());
@@ -33,13 +38,12 @@ public class ProduitBuilderTest extends TestCase {
         assertEquals("Lait", produit.getAllergenes().get(0).getNom());
     }
 
-    @Test
     public void testBuildProduitMinimal() {
         Produit produit = new ProduitBuilder()
-                .nom("Eau minérale")
-                .grade("B")
-                .categorie("Boissons")
-                .marque("Evian")
+                .withNom("Eau minérale")
+                .withGrade("B")
+                .withCategorie("Boissons")
+                .withMarque("Evian")
                 .build();
 
         assertEquals("Eau minérale", produit.getNom());
@@ -49,17 +53,22 @@ public class ProduitBuilderTest extends TestCase {
         assertTrue(produit.getAllergenes().isEmpty());
     }
 
-    @Test
     public void testBuildProduitPlusieursAdditifsEtAllergenes() {
+        Additif lecithine = new Additif("Lécithine", 2.0);
+        Additif vanilline = new Additif("Vanilline", 0.1);
+
+        Allergene gluten = new Allergene("Gluten", 450.0);
+        Allergene oeuf = new Allergene("Oeuf", 30.0);
+
         Produit produit = new ProduitBuilder()
-                .nom("Biscuit")
-                .grade("C")
-                .categorie("Snacks")
-                .marque("Lu")
-                .additif("Lécithine", 2.0)
-                .additif("Vanilline", 0.1)
-                .allergene("Gluten", 450.0)
-                .allergene("Œuf", 30.0)
+                .withNom("Biscuit")
+                .withGrade("C")
+                .withCategorie("Snacks")
+                .withMarque("Lu")
+                .withAdditif(lecithine)
+                .withAdditif(vanilline)
+                .withAllergene(gluten)
+                .withAllergene(oeuf)
                 .build();
 
         assertEquals(2, produit.getAdditifs().size());
